@@ -8,20 +8,20 @@ class PrintEditionItem {
   }
 
   fix(){
-    state = state * 1.5;
+    this.state = this.state * 1.5;
   }
 
-  set stateAdjust(state) {
-    if (this.state < 0) {
-      this.this.state = 0;
-    } else if (this.this.state > 100) {
-        this.state = 100;
+  set state(newState) {
+    if (newState < 0) {
+      this._state = 0;
+    } else if (newState > 100) {
+        this._state = 100;
     } else {
-      this.state = state;
+      this._state = newState;
     }
   }
-   get stateAdjust(){
-    return this.state;
+   get state(){
+    return this._state;
    }
 }
 
@@ -33,7 +33,7 @@ class Magazine extends PrintEditionItem {
 }
 
 class Book extends PrintEditionItem {
-  constructor(name, releaseDate, pagesCount, author){
+  constructor(author, name, releaseDate, pagesCount){
     super(name, releaseDate, pagesCount);
     this.type = 'book';
     this.author = author;
@@ -43,7 +43,7 @@ class Book extends PrintEditionItem {
 class NovelBook extends Book {
   constructor(name, releaseDate, pagesCount){
     super(name, releaseDate, pagesCount);
-    this.type = 'novel';s
+    this.type = 'novel';
   }
 }
 
@@ -68,26 +68,30 @@ class Library{
   }
 
   addBook(book){
-    if (state > 30) {
+    if (book.state > 30) {
         this.books.push(book);
     }
   }
 
   findBookBy(type, value){
-    if (this.type.includes(value)){
-      return (type +'книга найдена');
-    } else {
-        return null; 
+    for (let i = 0; i < this.books.length; i++) {
+      if (this.books[i].hasOwnProperty(type) && this.books[i][type] === value) {
+        return this.books[i];
+      } else {
+        return null;
       }
+    }
   }  
 
   giveBookByName(bookName){
-    if (this.name === bookName){
-        return bookName;
-    } else {
+    if (this.findBookBy(bookName) !== bookName) {
         return null;
-      }
+      } else {
+        this.books.filter(function (bookName) {
+          if (this.findBookBy(bookName) === bookName) {
+            return this.findBookBy(bookName);
+          }
+          });
+        }   
   }
-
-
 }
