@@ -84,6 +84,7 @@ class Library{
   }  
 
   giveBookByName(bookName){
+    let findedBook = null;
     if (this.findBookBy(bookName) !== bookName) {
         return null;
       } else {
