@@ -71,13 +71,13 @@ class AlarmClock {
   }
 }
 
-// const alarm = new AlarmClock();
-// function ringAlarm(num) {
-//     console.log(`Звонок ${num} прозвенел`);
-// }
-// alarm.addClock('10:53', () => ringAlarm('первый звонок'));
+const alarm = new AlarmClock();
+function ringAlarm(num) {
+    console.log(`Звонок ${num} прозвенел`);
+}
+alarm.addClock('11:25', () => ringAlarm('первый звонок'));
 // alarm.addClock('11:11', () => ringAlarm('второй звонок'));
 // alarm.addClock('15:30', () => ringAlarm('третий звонок'));
 
-// console.log('alarm', alarm);
-// alarm.start();
+console.log('alarm', alarm);
+alarm.start();
